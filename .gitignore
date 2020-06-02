@@ -1,0 +1,4 @@
+build
+.vscode
+projects/andrewbot_arduino/src
+out

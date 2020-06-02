@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<header>
+    <title>
+        Robot Brain Command
+    </title>
+    <style>
+        table {
+            border: thin solid;
+        }
+
+        td {
+            border: thin solid;
+        }
+    </style>
+</header>
+
+<body>
+
+    <h1>Robot Brain Command</h1>
+
+    <h2>Command Len</h2>
+    <table style="width:100%">
+        <tr>
+            <td>0x4F (79)</td>
+            <td>Header Command Len</td>
+        </tr>
+        <tr>
+            <td>XX</td>
+            <td>ACK</td>
+        </tr>
+        <tr>
+            <td>XX</td>
+            <td>Command len</td>
+        </tr>
+
+    </table>
+
+
+
+    <h2>Request Action Command</h2>
+    <table style="width:100%">
+        <tr>
+            <td>0x4A (74)</td>
+            <td>Brain Command</td>
+
+        </tr>
+        <tr>
+            <td>XX</td>
+            <td>ACK</td>
+
+        </tr>
+        <tr>
+            <td>XX</td>
+            <td>Number of commands</td>
+
+        </tr>
+        <tr>
+            <td></td>
+            <td>0xCC (204)</td>
+            <td>Chain channel command</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>XX</td>
+            <td>Channel ID</td>
+
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>XX</td>
+            <td>Number of commands</td>
+
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td bgcolor="#00FF00">0x10 (16)</td>
+            <td bgcolor="#00FF00">Servo write position</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td bgcolor="#00FF00">XX</td>
+            <td bgcolor="#00FF00">Module position</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td bgcolor="#00FF00">XX (0-180)</td>
+            <td bgcolor="#00FF00">Position</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td bgcolor="#00FFFF">0x11 (17)</td>
+            <td bgcolor="#00FFFF">Servo read position</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td bgcolor="#00FFFF">XX</td>
+            <td bgcolor="#00FFFF">Module position</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td bgcolor="#FF0000">0x12 (18)</td>
+            <td bgcolor="#FF0000">Servo set led</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td bgcolor="#FF0000">XX</td>
+            <td bgcolor="#FF0000">Module position</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td bgcolor="#FF0000">XX (0-1)</td>
+            <td bgcolor="#FF0000">Red</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td bgcolor="#FF0000">XX (0-1)</td>
+            <td bgcolor="#FF0000">Green</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td bgcolor="#FF0000">XX (0-1)</td>
+            <td bgcolor="#FF0000">Blue</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td bgcolor="#FFFF00">0x20 (32)</td>
+            <td bgcolor="#FFFF00">Led set color</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td bgcolor="#FFFF00">XX</td>
+            <td bgcolor="#FFFF00">Module position</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td bgcolor="#FFFF00">XX (0-7)</td>
+            <td bgcolor="#FFFF00">Red</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td bgcolor="#FFFF00">XX (0-7)</td>
+            <td bgcolor="#FFFF00">Green</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td bgcolor="#FFFF00">XX (0-7)</td>
+            <td bgcolor="#FFFF00">Blue</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td bgcolor="#FFFF00">XX (0-7)</td>
+            <td bgcolor="#FFFF00">Facetime</td>
+        </tr>
+    </table>
+
+    <h2>Reply Action Command</h2>
+    <table style="width:100%">
+        <tr>
+            <td>0x4A (74)</td>
+            <td>Brain Command</td>
+
+        </tr>
+        <tr>
+            <td>0xFC (252)</td>
+            <td>Reply Command</td>
+
+        </tr>
+        <tr>
+            <td>XX</td>
+            <td>ACK</td>
+
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>status</td>
+
+        </tr>
+        <tr>
+            <td>XX</td>
+            <td>Number of commands</td>
+
+        </tr>
+        <tr>
+            <td></td>
+            <td>0xCC (204)</td>
+            <td>Chain channel command</td>
+
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>XX</td>
+            <td>Channel ID</td>
+
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>XX</td>
+            <td>Number of commands</td>
+
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td bgcolor="#00FFFF">0x11 (17)</td>
+            <td bgcolor="#00FFFF">Servo read position</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td bgcolor="#00FFFF">XX</td>
+            <td bgcolor="#00FFFF">Module position</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td bgcolor="#00FFFF">XX (0-180)</td>
+            <td bgcolor="#00FFFF">Position</td>
+        </tr>
+    </table>
+
+    <h2>Reply Action Command Error</h2>
+    <table style="width:100%">
+        <tr>
+            <td>0x4A (74)</td>
+            <td>Brain Command</td>
+
+        </tr>
+        <tr>
+            <td>0xFC (252)</td>
+            <td>Reply Command</td>
+
+        </tr>
+        <tr>
+            <td>XX</td>
+            <td>ACK</td>
+
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>status</td>
+
+        </tr>
+        <tr>
+            <td></td>
+            <td bgcolor="#FF0000">255</td>
+            <td bgcolor="#FF0000">UNKNOWN COMMAND</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td bgcolor="#FF0000">255</td>
+            <td bgcolor="#FF0000"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td bgcolor="#FF0000">XX</td>
+            <td bgcolor="#FF0000">Main command unknown</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td bgcolor="#FF00FF">255</td>
+            <td bgcolor="#FF00FF">UNKNOWN BRAIN COMMAND</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td bgcolor="#FF00FF">XX</td>
+            <td bgcolor="#FF00FF">Command</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td bgcolor="#FF00FF">0</td>
+            <td bgcolor="#FF00FF"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td bgcolor="#FF8888">255</td>
+            <td bgcolor="#FF8888">UNKNOWN MODULE COMMAND</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td bgcolor="#FF8888">255</td>
+            <td bgcolor="#FF8888">UNKNOWN MODULE COMMAND</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td bgcolor="#FF8888">XX</td>
+            <td bgcolor="#FF8888">Module command</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td bgcolor="#00FF00">XX</td>
+            <td bgcolor="#00FF00">Chain Position</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td bgcolor="#00FF00">XX</td>
+            <td bgcolor="#00FF00">Module position</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td bgcolor="#00FF00">0x10</td>
+            <td bgcolor="#00FF00">Servo Error Command Unknown</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td bgcolor="#FFFF00">XX</td>
+            <td bgcolor="#FFFF00">Chain Position</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td bgcolor="#FFFF00">XX</td>
+            <td bgcolor="#FFFF00">Module position</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td bgcolor="#FFFF00">0x20</td>
+            <td bgcolor="#FFFF00">Led Error Command Unknown</td>
+        </tr>
+    </table>
+</body>
+
+</html>
