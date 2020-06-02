@@ -54,7 +54,12 @@ void RobotBrain::synchronize(){
 
       switch(chain_list[chain_pos]->getType(module)){
         case TYPE_SERVO:
-          servo_list[last_servo_added++]=chain_list[chain_pos]->getServo(module);
+          servo_list[last_servo_added]=chain_list[chain_pos]->getServo(module);
+          servo_list[last_servo_added]->setLim(false);
+          servo_list[last_servo_added]->setColor(0,0,1);
+          servo_list[last_servo_added]->setAutoUpdate(false);
+          servo_list[last_servo_added]->setPosition(90);
+          last_servo_added++;
           break;
 
         case TYPE_LED:
@@ -146,7 +151,7 @@ int RobotBrain::processCommand(byte *command){
 void RobotBrain::moveServosCommand(byte *command, int &pos){
 
   for (int servo=0; servo< last_servo_added; servo++){
-    servo_list[servo]->setPositionSmart(command[pos++]);
+    servo_list[servo]->setPosition(command[pos++]);
   }
   
 }
@@ -155,9 +160,9 @@ void RobotBrain::deltaPosServosCommand(byte *command, int &pos){
   int value =0;
 
   for (int servo=0; servo< last_servo_added; servo++){
-    value=servo_list[servo]->getPositionSmart();
+    value=servo_list[servo]->getPosition();
     value+=int(char(command[pos++])); //Enable negative increment
-    servo_list[servo]->setPositionSmart(value);
+    servo_list[servo]->setPosition(value);
   }
   
 }
@@ -168,7 +173,7 @@ int RobotBrain::getServosPosition(byte *reply){
   reply[pos++]= last_servo_added;
 
   for (int servo=0; servo< last_servo_added; servo++){
-    reply[pos++]= servo_list[servo]->getPositionSmart();
+    reply[pos++]= servo_list[servo]->getPosition();
   }
 
   for (;pos<COMMAND_SIZE;pos++){

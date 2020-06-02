@@ -75,36 +75,36 @@ ServoAdapter :: ServoAdapter(Module & module, Chain & chain) : ModuleAdapter(mod
 int ServoAdapter :: getPosition() {
 	return map(module.lastInput, SERVO_MIN, SERVO_MAX, 0, 180);
 }
-int ServoAdapter::getPositionSmart(){
-	if (!lim_status){
-		setLim(true);
-		if (!autoUpdate){
-			chain.update();
-			chain.update();
-		}
-		setColor(1,0,0);
-		if (!autoUpdate){
-			chain.update();
-			chain.update();
-		}
-	}
-	return getPosition();
-}
-ServoAdapter & ServoAdapter::setPositionSmart(int pos){
-	if (lim_status){
-		setLim(false);
-		// if (!autoUpdate){
-		// 	chain.update();
-		// 	chain.update();
-		// }
-		// setColor(0,0,1);
-		// if (!autoUpdate){
-		// 	chain.update();
-		// 	chain.update();
-		// }
-	}
-	return setPosition(pos);
-}
+// int ServoAdapter::getPositionSmart(){
+// 	if (!lim_status){
+// 		setLim(true);
+// 		if (!autoUpdate){
+// 			chain.update();
+// 			chain.update();
+// 		}
+// 		setColor(1,0,0);
+// 		if (!autoUpdate){
+// 			chain.update();
+// 			chain.update();
+// 		}
+// 	}
+// 	return getPosition();
+// }
+// ServoAdapter & ServoAdapter::setPositionSmart(int pos){
+// 	if (lim_status){
+// 		setLim(false);
+// 		// if (!autoUpdate){
+// 		// 	chain.update();
+// 		// 	chain.update();
+// 		// }
+// 		// setColor(0,0,1);
+// 		// if (!autoUpdate){
+// 		// 	chain.update();
+// 		// 	chain.update();
+// 		// }
+// 	}
+// 	return setPosition(pos);
+// }
 ServoAdapter & ServoAdapter :: setPosition(int pos) {
 	module.output1 = map(pos, 0, 180, SERVO_MIN, SERVO_MAX);
 

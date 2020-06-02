@@ -110,9 +110,9 @@ class ServoAdapter : public ModuleAdapter {
 		ServoAdapter(Module & module, Chain & chain);
 
 		int getPosition();
-		int getPositionSmart();
+		//int getPositionSmart();
 		ServoAdapter & setPosition(int pos);
-		ServoAdapter & setPositionSmart(int pos);
+		//ServoAdapter & setPositionSmart(int pos);
 		ServoAdapter & setLim(int enable);
 		ServoAdapter & setColor(byte r, byte g, byte b);
 		ServoAdapter & setColor(byte color);

@@ -2,3 +2,6 @@ build
 .vscode
 projects/andrewbot_arduino/src
 out
+lib/Arduino-Stub
+lib/arduino-mock
+lib/googletest
