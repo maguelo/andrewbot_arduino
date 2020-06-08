@@ -114,12 +114,22 @@ class ServoAdapter : public ModuleAdapter {
 		ServoAdapter & setPosition(int pos);
 		//ServoAdapter & setPositionSmart(int pos);
 		ServoAdapter & setLim(int enable);
-		ServoAdapter & setColor(byte r, byte g, byte b);
 		ServoAdapter & setColor(byte color);
+		byte getColor();
+		void setPositionMin(int pos);
+		void setPositionMax(int pos);
 		bool getLimStatus();
 		int checkType();
-	private:
+
+	protected:
+		ServoAdapter & setColor(byte r, byte g, byte b);
+
+	protected:
 		bool lim_status=false;
+		byte min_pos= SERVO_MIN;
+		byte max_pos= SERVO_MAX;
+		byte position;
+		byte color=SERVO_COLOR_OFF;
 };
 
 class LedAdapter : public ModuleAdapter {

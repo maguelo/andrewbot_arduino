@@ -73,7 +73,11 @@ ServoAdapter :: ServoAdapter(Module & module, Chain & chain) : ModuleAdapter(mod
 }
 
 int ServoAdapter :: getPosition() {
-	return map(module.lastInput, SERVO_MIN, SERVO_MAX, 0, 180);
+	if (lim_status){
+		return map(module.lastInput, SERVO_MIN, SERVO_MAX, 0, 180);
+	}else{
+		return map(position, SERVO_MIN, SERVO_MAX, 0, 180);
+	}
 }
 // int ServoAdapter::getPositionSmart(){
 // 	if (!lim_status){
@@ -107,7 +111,8 @@ int ServoAdapter :: getPosition() {
 // }
 ServoAdapter & ServoAdapter :: setPosition(int pos) {
 	module.output1 = map(pos, 0, 180, SERVO_MIN, SERVO_MAX);
-
+	module.output1 = constrain(module.output1, min_pos, max_pos);
+	position = module.output1;
 	if (autoUpdate) chain.update();
 
 	return *this;
@@ -133,24 +138,9 @@ ServoAdapter & ServoAdapter :: setLim(int enable) {
 bool ServoAdapter::getLimStatus(){
 	return lim_status;
 }
-
-ServoAdapter & ServoAdapter :: setColor(byte r, byte g, byte b) {
-	// clamp parameters to 0 or 1 (take LSB)
-	r &= 0x01;
-	g &= 0x01;
-	b &= 0x01;
-
-	module.output1 = 0xF0 | (r << 0) | 
-	                        (g << 1) | 
-	                        (b << 2);
-
-	if (autoUpdate) chain.update();
-
-	return *this;
-}
-
 ServoAdapter & ServoAdapter :: setColor(byte color) {
 	// clamp parameters to 0 or 1 (take LSB)
+	this->color = color;
 	switch (color)
 	{
 	case 0: // OFF
@@ -182,6 +172,33 @@ ServoAdapter & ServoAdapter :: setColor(byte color) {
 	}
 
 	return *this;
+}
+
+
+ServoAdapter & ServoAdapter :: setColor(byte r, byte g, byte b) {
+	// clamp parameters to 0 or 1 (take LSB)
+	r &= 0x01;
+	g &= 0x01;
+	b &= 0x01;
+
+	module.output1 = 0xF0 | (r << 0) | 
+	                        (g << 1) | 
+	                        (b << 2);
+
+	if (autoUpdate) chain.update();
+
+	return *this;
+}
+
+byte ServoAdapter::getColor(){
+
+}
+void ServoAdapter::setPositionMin(int pos){
+	min_pos = min(max(pos, SERVO_MIN), SERVO_MAX);
+}
+
+void ServoAdapter::setPositionMax(int pos){
+	max_pos = max(min(pos, SERVO_MAX), SERVO_MIN);
 }
 
 int ServoAdapter :: checkType() {

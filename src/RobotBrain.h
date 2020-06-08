@@ -25,6 +25,8 @@
 #define SERVO_SET_MANUAL 0x06
 #define SERVO_INC_POS 0x07    
 #define SERVO_MOVE_CMD 0x08    // Bluetooth
+#define SERVO_REQ_MOD 0x09    
+#define SERVO_COLOR_GET 0x0b  
 #define SERVO_COLOR_CMD 0x0c  // Bluetooth
 #define BASE_MOVE_CMD 0x0d         // Bluetooth
 
@@ -82,11 +84,11 @@ class RobotBrain{
 
     int processCommand(byte *command);
 
-    // int setServoMinCommand(byte *command, int &pos);
+    void setServosMinCommand(byte *command, int &pos);
 
     // int getServoMinCommand(byte *command, int &pos);
     
-    // int setServoMaxCommand(byte *command, int &pos);
+    void setServosMaxCommand(byte *command, int &pos);
     
     // int getServoMaxCommand(byte *command, int &pos);
 
@@ -94,11 +96,17 @@ class RobotBrain{
 
     void deltaPosServosCommand(byte *command, int &pos);
 
-    int getServosPosition(byte *reply);
-
     void setServosManual(byte *command, int &pos);
 
     void setServosColor(byte *command, int &pos);
+
+
+    // Publish data
+    int getServosPosition(byte *reply);
+
+    int getServosMode(byte *reply);
+
+    int  getServosColor(byte *reply);
 
     // int processCommand(byte *command);
 

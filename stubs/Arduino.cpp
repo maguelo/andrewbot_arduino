@@ -101,3 +101,16 @@ size_t Print::print(double value, int base) {
 }
 
 void wdt_reset() {}
+
+long min(long value1, long value2){
+  if (value1<value2){
+    return value1;
+  }
+  return value2;
+}
+long max( long value1, long value2){
+  if (value1>value2){
+    return value1;
+  }
+  return value2;
+}

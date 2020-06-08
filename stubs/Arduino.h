@@ -80,6 +80,8 @@ void mockAnalogRead(uint8_t pin, int value);
 typedef void (*digitalWriteHookFn)(uint8_t pin, uint8_t val);
 void hookDigitalWrite(digitalWriteHookFn fn);
 long map(long, long, long, long, long);
+long min(long value1, long value2);
+long max( long value1, long value2);
 unsigned long pulseIn(uint8_t pin, uint8_t state, unsigned long timeout);
 
 #ifdef __cplusplus
