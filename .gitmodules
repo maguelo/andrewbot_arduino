@@ -1,9 +1,0 @@
-[submodule "lib/Arduino-Stub"]
-	path = lib/Arduino-Stub
-	url = https://github.com/frankleonrose/Arduino-Stub.git
-[submodule "lib/googletest"]
-	path = lib/googletest
-	url = https://github.com/google/googletest.git
-[submodule "lib/arduino-mock"]
-	path = lib/arduino-mock
-	url = https://github.com/orri93/arduino-mock.git

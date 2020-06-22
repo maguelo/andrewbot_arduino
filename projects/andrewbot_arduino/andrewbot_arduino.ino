@@ -1,5 +1,8 @@
+
+
 #define __ARDUINO_UNO_REDUCED_MEMORY__
-#include "src/RobotBrain.h"
+#include <Meccanoid.h>
+#include <RobotBrain.h>
 #include <ros.h>
 
 #include <andrewbot_msgs/RobotCommand.h>

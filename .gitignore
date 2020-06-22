@@ -5,4 +5,4 @@ out
 lib/Arduino-Stub
 lib/arduino-mock
 lib/googletest
-
+arduino_lib
