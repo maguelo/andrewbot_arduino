@@ -23,7 +23,7 @@
 #define SERVO_SET_MAX 0x04
 #define SERVO_GET_MAX 0x05
 #define SERVO_SET_MANUAL 0x06
-#define SERVO_INC_POS 0x07    
+#define SERVO_MOVE_DELTA_CMD 0x07    
 #define SERVO_MOVE_CMD 0x08    // Bluetooth
 #define SERVO_REQ_MOD 0x09    
 #define SERVO_COLOR_GET 0x0b  
@@ -94,7 +94,7 @@ class RobotBrain{
 
     void moveServosCommand(byte *command, int &pos);
 
-    void deltaPosServosCommand(byte *command, int &pos);
+    void moveDeltaServosCommand(byte *command, int &pos);
 
     void setServosManual(byte *command, int &pos);
 

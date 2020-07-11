@@ -6,6 +6,7 @@
 #include <ros.h>
 
 #include <andrewbot_msgs/RobotCommand.h>
+#include <andrewbot_robot/GetServoStatus.h>
 
 #define R_HEAD 0x01
 #define PIN_HEAD 2
@@ -44,9 +45,6 @@ void publishServosMode(){
   robotbrain.getServosMode(reply);
   out_cmd_mode.command=reply;
   out_cmd_mode.command_length=COMMAND_SIZE;
-  //for (int i=0;i< COMMAND_SIZE; i++){
-  //  out_cmd_mode.command[i]=reply[i];
-  //}
   pub_servo_mode.publish(&out_cmd_mode);
 }
 
@@ -57,18 +55,16 @@ void publishServosColor(){
   robotbrain.getServosColor(reply);
   out_cmd_color.command=reply;
   out_cmd_color.command_length=COMMAND_SIZE;
-  //for (int i=0;i< COMMAND_SIZE; i++){
-  //  out_cmd_color.command[i]=reply[i];
-  //}
   pub_servo_color.publish(&out_cmd_color);
 }
 
 
 void commandCallback(const andrewbot_msgs::RobotCommand& msg) {
-  int pos=0;
+  robotbrain.processCommand(msg.command);
+/*  int pos=0;
   switch (msg.command[pos++]) {
     case BASE_MOVE_CMD:
-      if (robotbrain.isWheelsRegistered()){
+
         robotbrain.commandMovement(msg.command[1], msg.command[2], msg.command[3], msg.command[4]);
       }
       break;
@@ -76,8 +72,17 @@ void commandCallback(const andrewbot_msgs::RobotCommand& msg) {
     case SERVO_MOVE_CMD:
       robotbrain.moveServosCommand(msg.command, pos);
       break;
+      
+    case SERVO_MOVE_DELTA_CMD:
+      robotbrain.moveDeltaServosCommand(msg.command,pos);
+      break;
+  
+//    case SERVO_SET_MANUAL:
+//      robotbrain.
+//      break;
+      
       // ignore others command
-  }
+  }*/
 }
 ros::Subscriber<andrewbot_msgs::RobotCommand> sub_commands("andrewbot/RobotCommand", commandCallback);
 

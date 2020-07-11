@@ -146,8 +146,8 @@ int RobotBrain::processCommand(byte *command)
   case SERVO_SET_MANUAL:
     setServosManual(command, pos);
     break;
-  case SERVO_INC_POS:
-    deltaPosServosCommand(command, pos);
+  case SERVO_MOVE_DELTA_CMD:
+    moveDeltaServosCommand(command, pos);
     break;
   case SERVO_MOVE_CMD:
     moveServosCommand(command, pos);
@@ -156,7 +156,9 @@ int RobotBrain::processCommand(byte *command)
     setServosColor(command, pos);
     break;
   case BASE_MOVE_CMD:
-    commandMovement(command[pos++], command[pos++], command[pos++], command[pos++]);
+    if (robotbrain.isWheelsRegistered()){
+      commandMovement(command[pos++], command[pos++], command[pos++], command[pos++]);
+    }
     break;
 
   case LED_COLOR_CMD:
@@ -164,21 +166,38 @@ int RobotBrain::processCommand(byte *command)
   }
 }
 
+/**
+ * Set Min position in a Servo. 
+ * If value provided is 0, skip servo 
+ */
 void RobotBrain::setServosMinCommand(byte *command, int &pos)
 {
-
+  int value=0; 
   for (int servo = 0; servo < last_servo_added; servo++)
   {
-    servo_list[servo]->setPositionMin(command[pos++]);
+    value = command[pos++];
+    if (value == 0){
+      continue;
+    }
+    servo_list[servo]->setPositionMin(value);
   }
 }
 
+/**
+ * Set Max position in a Servo. 
+ * If value provided is 0, skip servo 
+ */
 void RobotBrain::setServosMaxCommand(byte *command, int &pos)
 {
 
+  int value=0; 
   for (int servo = 0; servo < last_servo_added; servo++)
   {
-    servo_list[servo]->setPositionMax(command[pos++]);
+    value = command[pos++];
+    if (value == 0){
+      continue;
+    }
+    servo_list[servo]->setPositionMax(value);
   }
 }
 
@@ -191,7 +210,7 @@ void RobotBrain::moveServosCommand(byte *command, int &pos)
   }
 }
 
-void RobotBrain::deltaPosServosCommand(byte *command, int &pos)
+void RobotBrain::moveDeltaServosCommand(byte *command, int &pos)
 {
   int value = 0;
 
@@ -221,6 +240,9 @@ int RobotBrain::getServosPosition(byte *reply)
   return pos;
 }
 
+/*
+Return servo mode
+*/
 int RobotBrain::getServosMode(byte *reply)
 {
   int pos = 0;
