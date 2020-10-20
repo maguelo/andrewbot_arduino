@@ -37,7 +37,7 @@ void publishServosPosition(){
   out_cmd_pos.command_length=COMMAND_SIZE;
   pub_servo_pos.publish(&out_cmd_pos);
 }
-
+/*
 ros::Publisher pub_servo_mode("andrewbot/servo_mode", &out_cmd_mode);
 
 void publishServosMode(){
@@ -57,7 +57,7 @@ void publishServosColor(){
   out_cmd_color.command_length=COMMAND_SIZE;
   pub_servo_color.publish(&out_cmd_color);
 }
-
+*/
 
 void commandCallback(const andrewbot_msgs::RobotCommand& msg) {
   robotbrain.processCommand(msg.command);
@@ -95,22 +95,22 @@ void setup() {
   robotbrain.synchronize();
 
 
-  //delay(500);
-  Serial.setTimeout(20);
+  delay(500);
+  Serial.setTimeout(10);
   
   nh.initNode();
   nh.advertise(pub_servo_pos);
-  nh.advertise(pub_servo_mode);
-  nh.advertise(pub_servo_color);
+//  nh.advertise(pub_servo_mode);
+//  nh.advertise(pub_servo_color);
   nh.subscribe(sub_commands);
 }
 
 void loop() {
   robotbrain.update();
   publishServosPosition();
-  publishServosColor();
-  publishServosMode();
+  //publishServosColor();
+  //publishServosMode();
   nh.spinOnce();
   
-  delay(10);
+  delay(5);
 }

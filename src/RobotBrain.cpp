@@ -155,8 +155,10 @@ int RobotBrain::processCommand(byte *command)
   case SERVO_COLOR_CMD:
     setServosColor(command, pos);
     break;
+  
   case BASE_MOVE_CMD:
-    if (robotbrain.isWheelsRegistered()){
+
+    if (isWheelsRegistered()){
       commandMovement(command[pos++], command[pos++], command[pos++], command[pos++]);
     }
     break;
